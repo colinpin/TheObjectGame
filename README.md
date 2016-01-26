@@ -1,0 +1,3 @@
+# TheObjectGame
+
+#slack channel: aslapgame
