@@ -1,5 +1,5 @@
 var health = 100;
 function slap(){
-    health =- health;
+    health --;
     alert(health);
 }
