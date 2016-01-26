@@ -4,10 +4,10 @@ function slap(){
     document.getElementById("pHealth").textContent = health.toString();
 }
 function punch(){
-    health-5;
-    alert(health);
+    health -=5;
+    document.getElementById("pHealth").textContent = health.toString();
 }
 function kick(){
-    health -10;
-    alert(health);
+    health -=10;
+    document.getElementById("pHealth").textContent = health.toString();
 }
