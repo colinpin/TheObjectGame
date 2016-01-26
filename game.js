@@ -1,13 +1,18 @@
-var health = 100;
-function slap(){
-    health --;
-    document.getElementById("pHealth").textContent = health.toString();
-}
-function punch(){
-    health -=5;
-    document.getElementById("pHealth").textContent = health.toString();
-}
-function kick(){
-    health -=10;
-    document.getElementById("pHealth").textContent = health.toString();
-}
+var player = {
+    health: 100,
+    slap: function () {
+        this.health--;
+        this.update();
+    },
+    punch: function () {
+        this.health -= 5;
+        this.update();
+    },
+    kick: function () {
+        this.health -= 10;
+        this.update();
+    },
+    update: function () {
+        document.getElementById("pHealth").textContent = this.health.toString();
+    }
+};
