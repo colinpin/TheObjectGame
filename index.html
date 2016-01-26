@@ -5,15 +5,19 @@
     <title>Slap Game</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="game.css">
+    
+    
 </head>
 <body>
     <div class="panel panel-default">
-        <div class="panel-heading">Panel heading without title</div>
+       <div class="panel-heading">Health: <span id="pHealth">100</span></div>
         <div class="panel-body">
             <img src="img/Stick_Figure.jpg"/>
         </div>
         <div class="panel-footer">
             <button id="button" onclick="slap()">BUTTON</button>
+            <button id="button" onclick="punch()">PUNCH</button>
+            <button id="button" onclick="punch()">KICK</button>
         </div>
         
 </div>
