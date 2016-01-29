@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Slap Game</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+    crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="game.css">
-    
-    
+
+
 </head>
+
 <body>
     <div class="panel panel-default">
-       <div class="panel-heading">Health: <span id="pHealth">100</span></div>
+        <div class="panel-heading">Health: <span id="pHealth">100</span>
+            <br/> Name: <span id="sName"> </span>
+            <br/> Hits: <span id="sHits"></span>
+            <br/>
+            <!--<input type="text" id="button1, button2 button3" />-->
+            <!--<button onclick="dog.eatUserDetermined()">Eat</button>-->
+        </div>
+
         <div class="panel-body">
-            <img src="img/Stick_Figure.jpg"/>
+            <img src="img/Stick_Figure.jpg" />
         </div>
         <div class="panel-footer">
             <button id="button" onclick="player.slap()">SLAP</button>
             <button id="button" onclick="player.punch()">PUNCH</button>
             <button id="button" onclick="player.kick()">KICK</button>
         </div>
-        
-</div>
-    
-    <script src="game.js"/></script>
+
+    </div>
+
+    <script src="game.js" /></script>
 </body>
+
 </html>
