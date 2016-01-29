@@ -7,7 +7,7 @@ var player = {
     slap: function (slap) {
         this.health--;
         this.hits ++;
-=======
+
     hits: 0,
     name: "King Kong",
     proWidth: document.getElementById("pBar"),
