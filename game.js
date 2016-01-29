@@ -1,12 +1,35 @@
+var Item = function (itemName, itemModifier, itemDescription) {
+    this.name = itemName;
+    this.modifier = itemModifier;
+    this.description = itemDescription;
+};
+
+var items = {
+    shield: new Item("Shield", 0.3, "Block the attacks!"),
+    sword: new Item("Sword", 1.5, "Stabbem!"),
+    helmet: new Item("Helmet", 0.1, "Protect your dome!"),
+    sandals: new Item("Sandals", .05, "Hey, nice flipflops!")
+};
+
 var player = {
     health: 100,
     hits: 0,
     name: "King Kong",
     proWidth: document.getElementById("pBar"),
+    playerItems: [items.shield, items.sword],
     //Slap, Punch, and Kick: subtracts players health by a defined number in the corresponding function.
     //Increase the Hit count by 1 and calls in the update function that will update health and hit. 
     
+    
+    addmods: function () {
+        var modifierTotal = 0;
+        for (var index = 0; index < this.playerItems.length; index++) {
+            modifierTotal += this.playerItems[index].modifier;
+            console.log(modifierTotal);
+        }
+    },
     slap: function () {
+        this.addmods();
         this.health--;
         this.hit();
         this.damaged();
@@ -47,7 +70,7 @@ var player = {
         document.getElementById("pHealth").textContent = this.health.toString();
         document.getElementById("pHits").innerText = this.hits.toString();
         document.getElementById("pName").textContent = this.name;
-         if (this.health <= 50) {
+        if (this.health <= 50) {
             document.getElementById("player-panel").classList.add("panel-warning");
             if (this.health <= 25) {
                 document.getElementById("player-panel").classList.add("panel-danger");
@@ -114,7 +137,7 @@ function death() {
     reset();
 }
 
-function cleanUp(){
+function cleanUp() {
     document.getElementById("pName").textContent = player.name;
     document.getElementById("pBar").classList.remove("progress-bar-warning")
     document.getElementById("pBar").classList.remove("progress-bar-danger")
@@ -134,3 +157,7 @@ function reset() {
     player.barUpdate();
 
 }
+
+
+//console.log(items.shield.modifier)
+//console.log(items.sword.modifier)
