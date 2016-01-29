@@ -1,0 +1,11 @@
+button img{
+    height: 100px;
+}
+.panel-body{
+    background-color: green;
+    width: 175px;
+    margin: auto;   
+}
+.progress-right .progress-bar {
+    float: right;
+}
