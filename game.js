@@ -1,40 +1,61 @@
+var Item = function(itemName, itemModifier, itemDescription){
+    this.name = itemName;
+    this.modifier = itemModifier;
+    this.description = itemDescription;
+};
+
+var weapons = {
+    shield: new Item("Shield",0.3,"Block the attacks!"),
+    sword: new Item("Sword",1.5,"Stabbem!"),
+    helmet: new Item("Helmet",0.1,"Protect your dome!"),
+    sandals: new Item("Sandals", .05,"Hey, nice flipflops!")
+};
+
+/* global pHealth */
 var player = {
     health: 100,
     hits: 0,
     name: "King Kong",
     proWidth: document.getElementById("pBar"),
     //Slap, Punch, and Kick: subtracts players health by a defined number in the corresponding function.
-    //Increase the Hit count by 1 and calls in the update function that will update health and hit. 
+    //Increase the Hit count by 1 and calls in the update function that will update health and hit.
+    playerItems:[weapons.shield, weapons.helmet],
     slap: function () {
+        this.addMods();
         this.health--;
         this.hit();
         this.barUpdate();
         this.update();
     },
     punch: function () {
+        this.addMods();
         this.health -= 5;
         this.hit();
         this.barUpdate();
         this.update();
     },
     kick: function () {
+        this.addMods();
         this.health -= 10;
         this.hit();
         this.barUpdate();
         this.update();
     },
     combo: function () {
+        this.addMods();
         this.health -= 25;
         this.hit();
         this.barUpdate();
         this.update();
     },
     death: function () {
+        this.addMods();
         this.health -= this.health;
         this.hit();
         this.barUpdate();
         this.update();
     },
+    //gives the player an item
     //Updates the players health and player hits after damage and hit as been updated accordingly
     //Updates color of the panel based on the players health.  Flashes the color to show damaged happen.
     update: function () {
@@ -92,6 +113,15 @@ var player = {
         }
     },
     alive: this.health > 0,
+    //modifies the damage done with items
+    addMods: function(){
+        var mods = 0;
+        for (var i = 0; i < this.playerItems.length; i++) {
+            //console.log(this.playerItems[i].modifier); //shows that we are collecting the modifiers of the items
+            mods += this.playerItems[i].modifier
+        }
+        console.log(mods);
+    }
 };
 
 function changeColor(info) {
