@@ -5,33 +5,39 @@ var player = {
     proWidth: document.getElementById("pBar"),
     //Slap, Punch, and Kick: subtracts players health by a defined number in the corresponding function.
     //Increase the Hit count by 1 and calls in the update function that will update health and hit. 
+    
     slap: function () {
         this.health--;
         this.hit();
+        this.damaged();
         this.barUpdate();
         this.update();
     },
     punch: function () {
         this.health -= 5;
         this.hit();
+        this.damaged();
         this.barUpdate();
         this.update();
     },
     kick: function () {
         this.health -= 10;
         this.hit();
+        this.damaged();
         this.barUpdate();
         this.update();
     },
     combo: function () {
         this.health -= 25;
         this.hit();
+        this.damaged();
         this.barUpdate();
         this.update();
     },
     death: function () {
         this.health -= this.health;
         this.hit();
+        this.damaged();
         this.barUpdate();
         this.update();
     },
@@ -40,12 +46,12 @@ var player = {
     update: function () {
         document.getElementById("pHealth").textContent = this.health.toString();
         document.getElementById("pHits").innerText = this.hits.toString();
-        this.damaged();
-        if (player.health <= 50) {
+        document.getElementById("pName").textContent = this.name;
+         if (this.health <= 50) {
             document.getElementById("player-panel").classList.add("panel-warning");
-            if (player.health <= 25) {
+            if (this.health <= 25) {
                 document.getElementById("player-panel").classList.add("panel-danger");
-                if (player.health === 0) {
+                if (this.health === 0) {
                     death();
                 }
             }
@@ -54,9 +60,11 @@ var player = {
     },
     barUpdate: function () {
         this.proWidth.style.width = this.health + '%';
-        if (player.health <= 50) {
+        if (this.health <= 50) {
+            document.getElementById("pBar").classList.remove("progress-bar-success");
             document.getElementById("pBar").classList.add("progress-bar-warning");
-            if (player.health <= 25) {
+            if (this.health <= 25) {
+                document.getElementById("pBar").classList.remove("progress-bar-warning");
                 document.getElementById("pBar").classList.add("progress-bar-danger");
             }
         }
@@ -65,25 +73,26 @@ var player = {
     //Allows players to name the player.
     reName: function () {
         this.name = prompt("Give yourself a name to be called as", "King Kong");
-        document.getElementById("pName").textContent = this.name;
+        this.update();
     },
     //keeping track of how many times a hit button as been selected.
     hit: function () {
         this.hits += 1;
     },
     damaged: function () {
-        if (player.health > this.alive) {
+        if (this.health > this.alive) {
             document.getElementById("playerpanel-body").style.backgroundColor = "red";
             setTimeout("changeColor('green')", 100)
-            if (player.health <= 50) {
+            if (this.health <= 50) {
                 document.getElementById("playerpanel-body").style.backgroundColor = "red";
                 setTimeout("changeColor('yellow')", 100)
-                if (player.health <= 25) {
+                if (this.health <= 25) {
                     document.getElementById("playerpanel-body").style.backgroundColor = "black";
                     setTimeout("changeColor('red')", 100)
                 }
             }
-        } else if (player.health < 0) {
+        } else if (this.health < 0) {
+            document.getElementById("pBar").classList.remove("progress-bar-warning");
             document.getElementById("player-panel").classList.add("panel-danger");
             document.getElementById("playerpanel-body").style.backgroundColor = "red";
             this.proWidth.style.width = 0 + '%';
@@ -104,14 +113,24 @@ function death() {
     alert("Sorry " + player.name + "! You died! *Queue* 'worlds smallest violen'");
     reset();
 }
+
+function cleanUp(){
+    document.getElementById("pName").textContent = player.name;
+    document.getElementById("pBar").classList.remove("progress-bar-warning")
+    document.getElementById("pBar").classList.remove("progress-bar-danger")
+    document.getElementById("pBar").classList.add("progress-bar-success");
+    document.getElementById("player-panel").classList.remove("panel-warning");
+    document.getElementById("player-panel").classList.remove("panel-danger");
+    document.getElementById("player-panel").classList.add("panel-success");
+    document.getElementById("playerpanel-body").style.backgroundColor = "green";
+}
+
 function reset() {
     player.health = 100;
     player.hits = 0;
     player.name = "King Kong";
-    document.getElementById("pBar").classList.add("progress-bar-success");
-    document.getElementById("player-panel").classList.add("panel-success");
+    cleanUp();
     player.update();
     player.barUpdate();
 
 }
-var progressBarSuccess =  document.getElementById("pBar").classList.add("progress-bar-success")
