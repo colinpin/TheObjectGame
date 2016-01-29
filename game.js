@@ -37,6 +37,7 @@ var player = {
         this.update();
     },
     punch: function () {
+        this.addmods();
         this.health -= 5;
         this.hit();
         this.damaged();
@@ -44,6 +45,7 @@ var player = {
         this.update();
     },
     kick: function () {
+        this.addmods();
         this.health -= 10;
         this.hit();
         this.damaged();
@@ -51,6 +53,7 @@ var player = {
         this.update();
     },
     combo: function () {
+        this.addmods();
         this.health -= 25;
         this.hit();
         this.damaged();
@@ -58,6 +61,7 @@ var player = {
         this.update();
     },
     death: function () {
+        this.addmods();
         this.health -= this.health;
         this.hit();
         this.damaged();
