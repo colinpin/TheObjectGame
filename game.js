@@ -1,3 +1,21 @@
+var Item = function(itemName, itemModifier, itemDescription){
+    this.nameOfItem = itemName;
+    this.itemModifer = itemModifier;
+    this.itemDesc = itemDescription;
+    
+}
+
+var items = {
+    shield: new Item("Shield",0.3,"This is an awesome shield!"),
+    axe: new Item("Axe",0.3,"This axe hurts you!"),
+    bazooka: new Item("Bazooka",0.3,"This Bazooka will take away 50% of your life!"),
+    instaLife: new Item("Instant Life", 1.0, "This brings your life back to 100%"),
+    apple: new Item("Apple", 0.2, "This healthy apple will give you 20% life.")
+}
+
+ items:[items.shield]; items:[items.axe]; items:[items.bazooka]; items:[items.instaLife]; items:[items.apple]
+ 
+
 var player = {
     health: 100,
     hits: 0,
@@ -115,3 +133,7 @@ function reset() {
 
 }
 var progressBarSuccess =  document.getElementById("pBar").classList.add("progress-bar-success")
+
+
+
+
