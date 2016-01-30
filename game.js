@@ -22,28 +22,28 @@ var player = {
     playerItems:[weapons.shield, weapons.helmet],
     slap: function () {
         this.addMods();
-        this.health--;
+        this.health -= (1 + (1 * this.addMods()));
         this.hit();
         this.barUpdate();
         this.update();
     },
     punch: function () {
         this.addMods();
-        this.health -= 5;
+        this.health -= (5 + (5 * this.addMods()));
         this.hit();
         this.barUpdate();
         this.update();
     },
     kick: function () {
         this.addMods();
-        this.health -= 10;
+        this.health -= (10 + (10 * this.addMods()));
         this.hit();
         this.barUpdate();
         this.update();
     },
     combo: function () {
         this.addMods();
-        this.health -= 25;
+        this.health -= (25 + (25 * this.addMods()));
         this.hit();
         this.barUpdate();
         this.update();
@@ -55,7 +55,6 @@ var player = {
         this.barUpdate();
         this.update();
     },
-    //gives the player an item
     //Updates the players health and player hits after damage and hit as been updated accordingly
     //Updates color of the panel based on the players health.  Flashes the color to show damaged happen.
     update: function () {
@@ -113,14 +112,14 @@ var player = {
         }
     },
     alive: this.health > 0,
-    //modifies the damage done with items
+    //calculates the modifications done with the items
     addMods: function(){
         var mods = 0;
         for (var i = 0; i < this.playerItems.length; i++) {
             //console.log(this.playerItems[i].modifier); //shows that we are collecting the modifiers of the items
             mods += this.playerItems[i].modifier
         }
-        console.log(mods);
+        return(mods);
     }
 };
 
