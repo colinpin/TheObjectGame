@@ -48,7 +48,7 @@ var player = {
         }
     },
     playGame: function (playerPick) {
-        this.actiomadn(playerPick);
+        this.action(playerPick);
         this.reduceDamage();
         this.hit();
         this.damaged();
