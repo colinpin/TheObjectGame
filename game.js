@@ -153,7 +153,3 @@ function reset() {
     player.update();
     player.barUpdate();
 }
-
-
-//console.log(items.shield.modifier)
-//console.log(items.sword.modifier)
