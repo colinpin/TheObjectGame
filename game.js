@@ -6,9 +6,9 @@ var Item = function(itemName, itemModifier, itemDescription){
 
 var weapons = {
     shield: new Item("Shield",0.3,"Block the attacks!"),
-    sword: new Item("Sword",1.5,"Stabbem!"),
+    sword: new Item("Sword",-0.4,"Stabbem!"),
     helmet: new Item("Helmet",0.1,"Protect your dome!"),
-    sandals: new Item("Sandals", .05,"Hey, nice flipflops!")
+    sandals: new Item("Sandals",-0.05,"Hey, nice flipflops!")
 };
 
 /* global pHealth */
@@ -22,28 +22,28 @@ var player = {
     playerItems:[weapons.shield, weapons.helmet],
     slap: function () {
         this.addMods();
-        this.health -= (1 + (1 * this.addMods()));
+        this.health -= (1 - (1 * this.addMods()));
         this.hit();
         this.barUpdate();
         this.update();
     },
     punch: function () {
         this.addMods();
-        this.health -= (5 + (5 * this.addMods()));
+        this.health -= (5 - (5 * this.addMods()));
         this.hit();
         this.barUpdate();
         this.update();
     },
     kick: function () {
         this.addMods();
-        this.health -= (10 + (10 * this.addMods()));
+        this.health -= (10 - (10 * this.addMods()));
         this.hit();
         this.barUpdate();
         this.update();
     },
     combo: function () {
         this.addMods();
-        this.health -= (25 + (25 * this.addMods()));
+        this.health -= (25 - (25 * this.addMods()));
         this.hit();
         this.barUpdate();
         this.update();
@@ -58,7 +58,7 @@ var player = {
     //Updates the players health and player hits after damage and hit as been updated accordingly
     //Updates color of the panel based on the players health.  Flashes the color to show damaged happen.
     update: function () {
-        document.getElementById("pHealth").textContent = this.health.toString();
+        document.getElementById("pHealth").textContent = ((this.health).toFixed(1)).toString();
         document.getElementById("pHits").innerText = this.hits.toString();
         this.damaged();
         if (player.health <= 50) {
