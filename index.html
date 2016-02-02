@@ -47,18 +47,18 @@
         </div>
         Player Items (change the items to be used to help reduce damage):
         <br>
-        <form role="form">
-            <div id="modifier" class="checkbox">
+        <form id="itemForm">
+            <div id="modifier">
                 <label>
-                    <input type="checkbox" name="items[]" value="0.2">Shield</label>
+                    <input type="checkbox" name="shield" value="0.2">Shield</label>
                 <label>
-                    <input type="checkbox" name="items[]" value="0.05">Helmet</label>
+                    <input type="checkbox" name="helmet" value="0.05">Helmet</label>
                 <label>
-                    <input type="checkbox" name="items[]" value="0.05">Sandals</label>
+                    <input type="checkbox" name="sandals" value="0.05">Sandals</label>
                 <label>
-                    <input type="checkbox" name="items[]" value="0.3">Chest Plate</label>
+                    <input type="checkbox" name="chestPlate" value="0.3">Chest Plate</label>
                 <label>
-                    <input type="submit" name="submit" class="btn btn-primary" value="Submit">
+                    <span class="btn btn-primary" onclick="updatePlayerItems()">Apply</span>
                 </label>
                 <br>
                 <label>Total Modifier:

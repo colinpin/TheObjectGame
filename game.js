@@ -63,13 +63,28 @@ function formatDecimal(val, n) {
 }
 attachCheckboxHandlers();
     
+function updatePlayerItems(){
+  var form = document.getElementById("itemForm");
+  player.playerItems = [];
+  
+  if(form.shield.checked){
+      player.playerItems.push(items.shield);
+  } if(form.helmet.check){
+      player.playerItems.push(items.helmet);
+  } if (form.sandals.checked){
+      player.playerItems.push(items.sandals)
+  } if (form.chestPlate.checked){
+      player.playerItems.push(items.chestPlate)
+  }
+}
+
 
 var player = {
     health: 100,
     hits: 0,
     name: "King Kong",
     proWidth: document.getElementById("pBar"),
-    playerItems: [items.shield,items.chestPlate],
+    playerItems: [],
     //Slap, Punch, and Kick: subtracts players health by a defined number in the corresponding function.
     //Increase the Hit count by 1 and calls in the update function that will update health and hit. 
     damage: 0,
@@ -95,7 +110,7 @@ var player = {
             return this.damage = -25
         } else if (attack === "death") {
             this.health -= this.health;
-            return this.health = 0;
+            return this.health = -100;
         }
     },
     playGame: function (playerPick) {
@@ -168,8 +183,7 @@ var player = {
             document.getElementById("player-panel").classList.add("panel-danger");
             document.getElementById("playerpanel-body").style.backgroundColor = "red";
             this.proWidth.style.width = 0 + '%';
-            alert("Didn't any ever to tell you it isn't nice to hit someone when their down?");
-            reset();
+            alert("Didn't anyone ever tell you it isn't nice to hit someone when their down?");
         }
     },
 };
@@ -179,10 +193,7 @@ function changeColor(info) {
 }
 //Player.health = 0, Changes panel color to red, sets background color to red, and alerts player their dead.
 function death() {
-    document.getElementById("player-panel").classList.add("panel-danger");
-    document.getElementById("playerpanel-body").style.backgroundColor = "red";
     alert("Sorry " + player.name + "! You died! *Queue* 'worlds smallest violen'");
-    reset();
 }
 
 function cleanUp() {
