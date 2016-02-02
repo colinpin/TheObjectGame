@@ -168,7 +168,7 @@ var player = {
             document.getElementById("player-panel").classList.add("panel-danger");
             document.getElementById("playerpanel-body").style.backgroundColor = "red";
             this.proWidth.style.width = 0 + '%';
-            alert("Didn't any ever to tell you it isn't nice to hit someone when their down?");
+            alert("Didn't anyone ever tell you it isn't nice to hit someone when their down?");
             reset();
         }
     },
