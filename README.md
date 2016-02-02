@@ -65,17 +65,17 @@ Students will use javascript in order to interact with the DOM to create a dynam
 [x] Add 2 more buttons Punch, and Kick to the UI, as well as their respective functions in javascript.
 [x] Have the punch function decrease the player health by 5, and kick by 10.
 [x] Don't forget to call update inside each function.
-[] Declare 2 more variables 'name', and 'hits' where you initialized the health variable. -name your player whatever you want, what datatype would a name be? -set the variable hits with a value of 0, every time the player is hit by a Slap, Punch, or Kick this variable should be increased by 1.
-[] Add a placeholder for player name, and hits inside the header next to health.
-[] Wire everything up like you did for "Slap".
+[x] Declare 2 more variables 'name', and 'hits' where you initialized the health variable. -name your player whatever you want, what datatype would a name be? -set the variable hits with a value of 0, every time the player is hit by a Slap, Punch, or Kick this variable should be increased by 1.
+[x] Add a placeholder for player name, and hits inside the header next to health.
+[x] Wire everything up like you did for "Slap".
 
 
 ##[] Step 7 - Testing Time
 
-[] You should now have a functioning application. Test the following
-[] In the panel header you should see an indicator for Health, Name, and Hits; their respective values should be 100, "Whatever Name You Chose", and 0.
-[] Click the slap button, you should see the player health drop to 99 and hit count to 1.
-[] Click the punch button, you should see the player health drop to 94 and hit count to 2.
-[] Finally click the Kick button, you should see the player health drop to 84 and hit count to 3.
-[] Keep pressing buttons... What happens when the player has been hit for over 100 hit points? Why does this happen?
-[] Discuss with the group some ideas on improvements, write these ideas down and be prepared to share.
+[x] You should now have a functioning application. Test the following
+[x] In the panel header you should see an indicator for Health, Name, and Hits; their respective values should be 100, "Whatever Name You Chose", and 0.
+[x] Click the slap button, you should see the player health drop to 99 and hit count to 1.
+[x] Click the punch button, you should see the player health drop to 94 and hit count to 2.
+[x] Finally click the Kick button, you should see the player health drop to 84 and hit count to 3.
+[x] Keep pressing buttons... What happens when the player has been hit for over 100 hit points? Why does this happen?
+[x] Discuss with the group some ideas on improvements, write these ideas down and be prepared to share.

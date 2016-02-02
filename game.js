@@ -2,67 +2,116 @@ var Item = function (itemName, itemModifier, itemDescription) {
     this.name = itemName;
     this.modifier = itemModifier;
     this.description = itemDescription;
+    this.draw = function(){
+        return '<div class="item">'+ this.name +'</div>';
+    }
 };
 
 var items = {
-    shield: new Item("Shield", 0.3, "Block the attacks!"),
-    sword: new Item("Sword", 1.5, "Stabbem!"),
-    helmet: new Item("Helmet", 0.1, "Protect your dome!"),
-    sandals: new Item("Sandals", .05, "Hey, nice flipflops!")
+    shield: new Item("Shield", 0.2, "Block the attacks!"),
+    helmet: new Item("Helmet", 0.05, "Protect your dome!"),
+    sandals: new Item("Sandals", 0.05, "Hey, nice flipflops!"),
+    chestPlate: new Item("Chest Plate", 0.3, "Big Shiny Metal")
 };
+
+// call onload or in script segment below form
+function attachCheckboxHandlers() {
+    // get reference to element containing modifier checkboxes
+    var el = document.getElementById('modifier');
+
+    // get reference to input elements in modifier container element
+    var modi = el.getElementsByTagName('input');
+    
+    // assign updateTotal function to onclick property of each checkbox
+    for (var i = 0, len = modi.length; i < len; i++) {
+        if (modi[i].type === 'checkbox') {
+            modi[i].onclick = updateTotal;
+        }
+    }
+}
+   
+// called onclick of modifier checkboxes
+function updateTotal(e) {
+    // 'this' is reference to checkbox clicked on
+    var form = this.form;
+    
+    // get current value in total text box, using parseFloat since it is a string
+    var val = parseFloat(form.elements['total'].value);
+    
+    // if check box is checked, add its value to val, otherwise subtract it
+    if (this.checked) {
+        val += parseFloat(this.value);
+    } else {
+        val -= parseFloat(this.value);
+    }
+    
+    // format val with correct number of decimal places
+    // and use it to update value of total text box
+    form.elements['total'].value = formatDecimal(val);
+}
+    
+// format val to n number of decimal places
+// modified version of Danny Goodman's (JS Bible)
+function formatDecimal(val, n) {
+    n = n || 2;
+    var str = "" + Math.round(parseFloat(val) * Math.pow(10, n));
+    while (str.length <= n) {
+        str = "0" + str;
+    }
+    var pt = str.length - n;
+    return str.slice(0, pt) + "." + str.slice(pt);
+}
+attachCheckboxHandlers();
+    
+function updatePlayerItems(){
+    
+}
 
 var player = {
     health: 100,
     hits: 0,
     name: "King Kong",
     proWidth: document.getElementById("pBar"),
-    playerItems: [items.shield, items.sword],
+    playerItems: [items.shield,items.chestPlate],
     //Slap, Punch, and Kick: subtracts players health by a defined number in the corresponding function.
     //Increase the Hit count by 1 and calls in the update function that will update health and hit. 
-    
-    
-    addmods: function () {
+    damage: 0,
+    addMods: function () {
         var modifierTotal = 0;
         for (var index = 0; index < this.playerItems.length; index++) {
             modifierTotal += this.playerItems[index].modifier;
-            console.log(modifierTotal);
+            // console.log(modifierTotal);
+        } return modifierTotal;
+    },
+    action: function (attack) {
+        if (attack === "slap") {
+            this.health--;
+            return this.damage = -1
+        } else if (attack === "punch") {
+            this.health -= 5;
+            return this.damage = -5
+        } else if (attack === "kick") {
+            this.health -= 10;
+            return this.damage = -10
+        } else if (attack === "combo") {
+            this.health = this.health -= 25;
+            return this.damage = -25
+        } else if (attack === "death") {
+            this.health -= this.health;
+            return this.health = 0;
         }
     },
-    slap: function () {
-        this.addmods();
-        this.health--;
+    playGame: function (playerPick) {
+        this.action(playerPick);
+        this.reduceDamage();
         this.hit();
         this.damaged();
         this.barUpdate();
         this.update();
     },
-    punch: function () {
-        this.health -= 5;
-        this.hit();
-        this.damaged();
-        this.barUpdate();
-        this.update();
-    },
-    kick: function () {
-        this.health -= 10;
-        this.hit();
-        this.damaged();
-        this.barUpdate();
-        this.update();
-    },
-    combo: function () {
-        this.health -= 25;
-        this.hit();
-        this.damaged();
-        this.barUpdate();
-        this.update();
-    },
-    death: function () {
-        this.health -= this.health;
-        this.hit();
-        this.damaged();
-        this.barUpdate();
-        this.update();
+    reduceDamage: function () {
+        this.health -= this.damage * this.addMods();
+        this.health = +(this.health.toFixed(1));
     },
     //Updates the players health and player hits after damage and hit as been updated accordingly
     //Updates color of the panel based on the players health.  Flashes the color to show damaged happen.
@@ -74,13 +123,14 @@ var player = {
             document.getElementById("player-panel").classList.add("panel-warning");
             if (this.health <= 25) {
                 document.getElementById("player-panel").classList.add("panel-danger");
-                if (this.health === 0) {
+                if (this.health === 0.00) {
                     death();
                 }
             }
         }
 
     },
+
     barUpdate: function () {
         this.proWidth.style.width = this.health + '%';
         if (this.health <= 50) {
@@ -102,6 +152,8 @@ var player = {
     hit: function () {
         this.hits += 1;
     },
+
+    alive: this.health > 0,
     damaged: function () {
         if (this.health > this.alive) {
             document.getElementById("playerpanel-body").style.backgroundColor = "red";
@@ -123,13 +175,12 @@ var player = {
             reset();
         }
     },
-    alive: this.health > 0,
 };
 
 function changeColor(info) {
     document.getElementById("playerpanel-body").style.backgroundColor = info;
 }
-//Player.health = 0, Changes panel color to red, sets background color to red, and alears player their dead.
+//Player.health = 0, Changes panel color to red, sets background color to red, and alerts player their dead.
 function death() {
     document.getElementById("player-panel").classList.add("panel-danger");
     document.getElementById("playerpanel-body").style.backgroundColor = "red";
@@ -155,7 +206,6 @@ function reset() {
     cleanUp();
     player.update();
     player.barUpdate();
-
 }
 
 
