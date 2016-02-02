@@ -3,7 +3,7 @@ var Item = function (itemName, itemModifier, itemDescription) {
     this.modifier = itemModifier;
     this.description = itemDescription;
     this.draw = function(){
-        return '<div class="item">'+ this.name +'</div>';
+    return '<div class="item">'+ this.name +'</div>';
     }
 };
 
@@ -63,9 +63,6 @@ function formatDecimal(val, n) {
 }
 attachCheckboxHandlers();
     
-function updatePlayerItems(){
-    
-}
 
 var player = {
     health: 100,
