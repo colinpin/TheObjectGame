@@ -81,8 +81,10 @@ function updatePlayerItems() {
 var punchFX;
 var slapFX;
 var kickFX;
-var comboFX;
 var deathFX;
+var comboFX;
+var marioFX;
+
 var player = {
     health: 100,
     hits: 0,
@@ -198,12 +200,7 @@ var player = {
             document.getElementById("playerpanel-body").style.backgroundColor = "red";
             this.proWidth.style.width = 0 + '%';
             alert("Didn't anyone ever tell you it isn't nice to hit someone when their down?");
-<<<<<<< HEAD
-            reset();
-=======
-            deathFX = document.getElementById("deathFX");
-            deathFX.play();
->>>>>>> origin/master
+
         }
     },
 };
@@ -236,6 +233,9 @@ function reset() {
     cleanUp();
     player.update();
     player.barUpdate();
+    marioFX = document.getElementById("marioFX");
+    marioFX.play();
+    
 }
 
 
