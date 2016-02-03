@@ -38,27 +38,27 @@
             </div>
 
             <!--Panel for action buttons-->
-            <button id="button" onclick="player.playGame('slap')"><img src="img/slap.jpg">SLAP</button>
-            <button id="button" onclick="player.playGame('punch')"><img src="img/punch.jpg">PUNCH</button>
-            <button id="button" onclick="player.playGame('kick')"><img src="img/kick.jpg">KICK</button>
-            <button id="button" onclick="player.playGame('combo')"><img src="img/combo.jpg">COMBO</button>
-            <button id="button" onclick="player.playGame('death')"><img src="img/death.jpg">INSTADEATH</button>
+            <button id="button" onclick="player.playGame('slap')"><img src="img/slap.jpg"><audio id="slapFX" src="sound_effects/slap.mp3" style="display: none;">SLAP</audio></button>
+            <button id="button" onclick="player.playGame('punch')"><img src="img/punch.jpg"><audio id="punchFX" src="sound_effects/punch.mp3" style="display: none;">PUNCH</audio></button>
+            <button id="button" onclick="player.playGame('kick')"><img src="img/kick.jpg"><audio id="kickFX" src="sound_effects/kick.mp3" style="display: none;">KICK</audio></button>
+            <button id="button" onclick="player.playGame('combo')"><img src="img/combo.jpg"><audio id="comboFX" src="sound_effects/comboBreaker.mp3" style="display: none;">COMBO</audio></button>
+            <button id="button" onclick="player.playGame('death')"><img src="img/death.jpg"><audio id="deathFX" src="sound_effects/superMarioDeath.mp3" style="display: none;">INSTADEATH</audio></button>
             <button id="button" onclick="reset()"><i class="fa fa-refresh"></i></button>
         </div>
         Player Items (change the items to be used to help reduce damage):
         <br>
-        <form role="form">
-            <div id="modifier" class="checkbox">
+        <form id="itemForm">
+            <div id="modifier">
                 <label>
-                    <input type="checkbox" name="items[]" value="0.2">Shield</label>
+                    <input type="checkbox" name="shield" value="0.2">Shield</label>
                 <label>
-                    <input type="checkbox" name="items[]" value="0.05">Helmet</label>
+                    <input type="checkbox" name="helmet" value="0.05">Helmet</label>
                 <label>
-                    <input type="checkbox" name="items[]" value="0.05">Sandals</label>
+                    <input type="checkbox" name="sandals" value="0.05">Sandals</label>
                 <label>
-                    <input type="checkbox" name="items[]" value="0.3">Chest Plate</label>
+                    <input type="checkbox" name="chestPlate" value="0.3">Chest Plate</label>
                 <label>
-                    <input type="submit" name="submit" class="btn btn-primary" value="Submit">
+                    <span class="btn btn-primary" onclick="updatePlayerItems()">Apply</span>
                 </label>
                 <br>
                 <label>Total Modifier:

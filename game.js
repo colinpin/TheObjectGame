@@ -2,8 +2,8 @@ var Item = function (itemName, itemModifier, itemDescription) {
     this.name = itemName;
     this.modifier = itemModifier;
     this.description = itemDescription;
-    this.draw = function(){
-    return '<div class="item">'+ this.name +'</div>';
+    this.draw = function () {
+        return '<div class="item">' + this.name + '</div>';
     }
 };
 
@@ -62,14 +62,33 @@ function formatDecimal(val, n) {
     return str.slice(0, pt) + "." + str.slice(pt);
 }
 attachCheckboxHandlers();
-    
 
+function updatePlayerItems() {
+    var form = document.getElementById("itemForm");
+    player.playerItems = [];
+
+    if (form.shield.checked) {
+        player.playerItems.push(items.shield);
+    } if (form.helmet.check) {
+        player.playerItems.push(items.helmet);
+    } if (form.sandals.checked) {
+        player.playerItems.push(items.sandals)
+    } if (form.chestPlate.checked) {
+        player.playerItems.push(items.chestPlate)
+    }
+}
+
+var punchFX;
+var slapFX;
+var kickFX;
+var comboFX;
+var deathFX;
 var player = {
     health: 100,
     hits: 0,
     name: "King Kong",
     proWidth: document.getElementById("pBar"),
-    playerItems: [items.shield,items.chestPlate],
+    playerItems: [],
     //Slap, Punch, and Kick: subtracts players health by a defined number in the corresponding function.
     //Increase the Hit count by 1 and calls in the update function that will update health and hit. 
     damage: 0,
@@ -83,19 +102,29 @@ var player = {
     action: function (attack) {
         if (attack === "slap") {
             this.health--;
+            slapFX = document.getElementById("slapFX");
+            slapFX.play();
             return this.damage = -1
         } else if (attack === "punch") {
             this.health -= 5;
+            punchFX = document.getElementById("punchFX");
+            punchFX.play();
             return this.damage = -5
         } else if (attack === "kick") {
             this.health -= 10;
+            kickFX = document.getElementById("kickFX");
+            kickFX.play();
             return this.damage = -10
         } else if (attack === "combo") {
             this.health = this.health -= 25;
+            comboFX = document.getElementById("comboFX");
+            comboFX.play();
             return this.damage = -25
         } else if (attack === "death") {
+            deathFX = document.getElementById("deathFX");
+            deathFX.play();
             this.health -= this.health;
-            return this.health = 0;
+            return this.health = -100;
         }
     },
     playGame: function (playerPick) {
@@ -169,7 +198,12 @@ var player = {
             document.getElementById("playerpanel-body").style.backgroundColor = "red";
             this.proWidth.style.width = 0 + '%';
             alert("Didn't anyone ever tell you it isn't nice to hit someone when their down?");
+<<<<<<< HEAD
             reset();
+=======
+            deathFX = document.getElementById("deathFX");
+            deathFX.play();
+>>>>>>> origin/master
         }
     },
 };
@@ -179,10 +213,9 @@ function changeColor(info) {
 }
 //Player.health = 0, Changes panel color to red, sets background color to red, and alerts player their dead.
 function death() {
-    document.getElementById("player-panel").classList.add("panel-danger");
-    document.getElementById("playerpanel-body").style.backgroundColor = "red";
     alert("Sorry " + player.name + "! You died! *Queue* 'worlds smallest violen'");
-    reset();
+    deathFX = document.getElementById("deathFX");
+    deathFX.play();
 }
 
 function cleanUp() {
